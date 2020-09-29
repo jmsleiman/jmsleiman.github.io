@@ -1,0 +1,188 @@
+body {
+	margin:50px 0px;
+	padding:0px;
+	text-align:center;
+	background-color: #79919C;
+	background-image: url('/img/background.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed
+}
+
+.textcentre { 
+	text-align: center;
+}
+
+.floatleft { 
+	float: left; 
+	margin: 0px 5px 5px 0px; 
+}
+
+.floatright { 
+	float: right; 
+	margin: 0px 0px 5px 5px; 
+}
+
+figcaption {
+	font-size: 60%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+figure{
+	text-align: center;
+}
+
+main{
+	text-align: center;
+	width:66%;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+	border:1px dashed #333;
+	background-color: #FFFFFF;
+}
+
+div.information {
+	font-size: 100%;
+	background-color: #FFFF66;
+	border:1px solid #333;
+	padding: 5px;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+div.warning {
+	font-size: 100%;
+	background-color: #CD5C5C;
+	border:1px solid #333;
+	padding: 5px;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+li {
+	list-style-position: inside;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+	font-size: 100%;
+}
+
+h1 {
+	font-size: 130%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+	text-align: center;
+}
+
+h2 {
+	font-size: 120%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+h3 {
+	font-size: 110%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+h4 {
+	font-size: 100%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+h5 {
+	font-size: 90%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+h6 {
+	font-size: 80%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+p.intro{
+	text-align: left;
+	font-size: 70%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+p.one {
+	font-size:150%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+p.two {
+	font-size: 60%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+p {
+	font-size: 100%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+p.terminal {
+	font-size: 80%;
+	background-color: #000000;
+	border:1px dotted #333;
+	font-family: Inconsolata, monospace;
+	/*font-weight: bold;*/
+	color: #B4CDCD;
+}
+
+p.code {
+	font-size: 100%;
+	background-color: #000000;
+	border: 1px solid;
+	font-family: Inconsolata, monospace;
+	color: #BEE554;
+	padding: 5px;
+}
+
+a:link {
+	color: red; 
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+}
+
+a:visited {
+	color: #27408B;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+}
+
+
+a:hover {
+	color: #00C78C;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+}
+
+a:active {
+	color: #9B30FF;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+}
+
+a.navigation{
+	font-size:70%;
+}
