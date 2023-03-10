@@ -1,0 +1,7 @@
+baseURL = "https://jmsleiman.com/"
+languageCode = "en-us"
+title = "jmsleiman.com"
+theme = "v1"
+
+[permalinks]
+	blog = "blog/:year/:month/:day-:title/"

@@ -1,0 +1,9 @@
+name = "jmsleiman-v1"
+license = "MIT"
+description = "The theme for my siste"
+homepage = "https://github.com/jmsleiman.github.io/"
+min_version = "0.1"
+
+[author]
+  name = "jmsleiman"
+  homepage = "jmsleiman.com"

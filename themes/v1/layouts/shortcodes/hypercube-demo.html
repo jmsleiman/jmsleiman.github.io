@@ -1,0 +1,35 @@
+<script>
+	var interval;
+	
+	function updateImage(value){
+		var imageURL = "/img/hypercube/frame_" + value + ".png";
+		document.getElementById("hypercube-output").src = imageURL;
+		document.getElementById("stage").innerHTML = "Stage: " + value;
+	}
+	
+	function autorun(){
+		interval = window.setInterval(updateNext, 2000);
+	}
+	
+	function updateNext(){
+		console.log("updateNext");
+		var current = parseInt(document.getElementById("time-slider").value);
+		var next = 0
+		if(current == 31){
+			document.getElementById("time-slider").value = 0;
+			clearInterval(interval);
+		}
+		else{
+			document.getElementById("time-slider").value = current + 1;
+			next = current + 1;
+		}
+		updateImage(next);
+	}
+	
+</script>
+
+<div class="slideshow">
+	<p id="stage"><button onClick="autorun()">Run</button> Stage 0</p>
+	<img id="hypercube-output" src="/img/hypercube/frame_0.png" alt="HyperCube Render" style="display: block; margin-left: auto;margin-right: auto;"/>
+	<input type="range" name="points" min="0" max="31" step="1" value="0" id="time-slider" style="width:75%" onchange="updateImage(this.value)">
+</div>
