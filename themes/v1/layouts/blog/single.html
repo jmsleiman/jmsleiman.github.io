@@ -7,9 +7,14 @@
   </head>
   <body>
     <main>
-		<a href="/about.html" class="floatleft navigation">About Me</a>
-		<a href="/" class="floatright navigation">Home</a>
+		<a href="/" class="floatleft navigation">Home</a>
+		<a href="/about.html" class="floatright navigation">About Me</a>
 		<br />
+		<h1>{{ .Title }}</h1>
+		<h2 style="font-style:italic;">"{{ .Params.Subtitle }}"</h2>
+		
+        {{ .TableOfContents }}
+		
 		{{.Content}}
     </main>
   </body>
