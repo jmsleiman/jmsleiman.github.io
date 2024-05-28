@@ -3,12 +3,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{{ .Title }} </title>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    {{ partial "header.html" .}} 
   </head>
   <body>
     <main>
 		<a href="/about.html" class="floatleft navigation">About Me</a>
-		<a href="" class="floatright navigation">fr</a>
+		<a href="/" class="floatright navigation">Home</a>
 		<br />
 		{{.Content}}
     </main>
