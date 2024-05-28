@@ -1,0 +1,62 @@
+body {
+	margin:50px 0px;
+	padding:0px;
+	text-align:center;
+	background-color: #79919C;
+	background-image: url('/img/background.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed
+}
+
+.textcentre { 
+	text-align: center;
+}
+
+.floatleft { 
+	float: left; 
+	margin: 0px 5px 5px 0px; 
+}
+
+.floatright { 
+	float: right; 
+	margin: 0px 0px 5px 5px; 
+}
+
+figcaption {
+	font-size: 60%;
+	background-color: transparent;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+figure{
+	text-align: center;
+}
+
+main{
+	text-align: center;
+	width:66%;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+	border:1px dashed #333;
+	background-color: #FFFFFF;
+}
+
+div.information {
+	font-size: 100%;
+	background-color: #FFFF66;
+	border:1px solid #333;
+	padding: 5px;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}
+
+div.warning {
+	font-size: 100%;
+	background-color: #CD5C5C;
+	border:1px solid #333;
+	padding: 5px;
+	font-family: "Bitstream Vera Sans", Verdana, Arial, Sans-Serif;
+	color: #000000;
+}

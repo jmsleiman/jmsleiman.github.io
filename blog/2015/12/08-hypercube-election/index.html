@@ -1,0 +1,72 @@
+<!doctype html><html><head><meta charset=utf-8><title>Hypercube Election</title><link rel=stylesheet href=https://jmsleiman.com/css/grid.cbf96529236f0a421571e101088ab84602e64f651dc92c58e0af8b1db71e496b.css><link rel=stylesheet href=https://jmsleiman.com/css/text.b3800b4a0a28d03bf48d8e43cc4ac8fdd8e5220e8b887a797add6e888b2e51c7.css><link rel=stylesheet href=https://jmsleiman.com/css/layout.8b7ed3be4f8bef72c35cf49ab9df2ef67f93498f5b872e732d0d43092c030fd4.css></head><body><main><a href=/about.html class="floatleft navigation">About Me</a>
+<a href=/ class="floatright navigation">Home</a><br><h1 id=simulation-of-a-leader-election-in-an-n-hypercube>Simulation of a Leader Election in an n-HyperCube</h1><h2 id=demo>Demo</h2><p>Shiny stuff first!</p><script>var interval;function updateImage(e){var t="/img/hypercube/frame_"+e+".png";document.getElementById("hypercube-output").src=t,document.getElementById("stage").innerHTML="Stage: "+e}function autorun(){interval=window.setInterval(updateNext,2e3)}function updateNext(){console.log("updateNext");var e=parseInt(document.getElementById("time-slider").value),t=0;e==31?(document.getElementById("time-slider").value=0,clearInterval(interval)):(document.getElementById("time-slider").value=e+1,t=e+1),updateImage(t)}</script><div class=slideshow><p id=stage><button onclick=autorun()>Run</button> Stage 0</p><img id=hypercube-output src=/img/hypercube/frame_0.png alt="HyperCube Render" style=display:block;margin-left:auto;margin-right:auto>
+<input type=range name=points min=0 max=31 step=1 value=0 id=time-slider style=width:75% onchange=updateImage(this.value)></div><h3 id=context>Context</h3><p>I&rsquo;ve been working on this for quite some time, but never had the patience to actually finish it. However, now it&rsquo;s complete. You can find it on <a href=https://github.com/jmsleiman/hypercube-election>GitHub</a>. It&rsquo;s written in python 2 and has few dependencies.</p><h4 id=leader-elections>Leader Elections</h4><p>Leader elections are usually applied to distributed systems. A herd of computers on a network are trying to determine who to put in charge, organically and without outside knowledge. They have to communicate amongst each other (and preferably with the least amount of messaging) to determine who will be &ldquo;Queen&rdquo; and how will they communicate with the &ldquo;Queen&rdquo;. This is useful when, for example, a herd of computers need to determine which node will be the authority on database data, or on logging data &ndash; or even to nominate a central point to do these activites.</p><p>Other leader elections exist, and could be added onto this utility later, but for now it merely does the &ldquo;normal&rdquo; leader elections.</p><h4 id=n-hypercube>n-Hypercube</h4><p>What is an <code>n-hypercube</code>? It&rsquo;s a <code>hypercube</code> with <em>n</em> nodes.</p><p>What is a hypercube? It&rsquo;s a topology where there are nodes, and each node is aware of a dimension <em>d</em>>. Every node has <em>d</em> connections among its neighbours and has no redundant connections. Essentially, a 2-cube is a square, and a 3-cube is a 3D cube, and a 4-cube is a tesseract.</p><h3 id=the-algorithm>The Algorithm</h3><p>(The algorithm being applied is a slight departure from the one I learned (thanks, <a href=https://www.site.uottawa.ca/~flocchin/>Dr. Paola Flocchini</a>!. In my variant, nodes update their Queen edge to better serve a better minimum spanning tree.)</p><ol><li>Message your neighbour on your 0 axis.
+i. Tell them your value, your rank, and challenge them to a duel</li><li>If you receive a message on any dimension, and you haven&rsquo;t reached the same rank, you hold the message for later.
+i. If you do match rank, or exceed it, read the message.
+ii. If you haven&rsquo;t been defeated, it&rsquo;s for you:
+a. If the value is better than yours, you become defeated, and the origin of the message is your Queen.
+b. If the value is worse than yours, you can rank up.
+iii. If you have been defeated, forward it to your queen.</li><li>If you increase your rank, you must message the node on the next edge.</li><li>If a node reaches a rank equal to the dimension of the cube, the election is over, and that node has won.</li></ol><h3 id=interesting-properties>Interesting Properties</h3><p>One interesting consequence is that, because the hypercube is composed of many smaller cubes linked together (a 2-cube is two 1-cubes, a 3-cube is two 2-cubes, 4-cube is two 3-cubes etc), the algorithm actually cuts the number of active nodes in half at each round (where a round is defined as being a round of messaging, not a round of time); if all the link delays were equal, the nodes would resolve the election in <code>log(n)</code> amount of time.</p><h3 id=running-the-simulation>Running the Simulation</h3><pre tabindex=0><code>$ python main.py [d] [choice]
+</code></pre><p>Where <code>d</code> is the dimensions to use (at very high dimensions, the program might fail to end in a reasonable amount of time), and <code>choice</code> indicates the direction of the election: whether high nodes or low nodes win.</p><p>Node names, values, and labels are generated randomly. The program simply shuffles through a list of values equal to <code>0...n</code> (<code>n</code> being the number of nodes, or <code>2^d</code>) to assign values, and the labels are just equal to the values. If you&rsquo;re interested in assigning custom values or custom topology, you can do so before calling the election; you can also supply your own list of nodes, if you&rsquo;re ok with the method I used to connect all the nodes.</p><h4 id=sample-output>Sample Output</h4><p>The command I used:</p><pre tabindex=0><code>hypercube-election$ python main.py 3 high
+defender=0 attacker=1 event=&#39;duel&#39;
+me=0 message=1 queen=1 queen_edge=0 event=&#39;defeated&#39;
+defender=5 attacker=3 event=&#39;duel&#39;
+me=5 rank=1 event=&#39;deflected&#39;
+defender=1 attacker=0 event=&#39;duel&#39;
+me=1 rank=1 event=&#39;deflected&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=2 attacker=6 event=&#39;duel&#39;
+me=2 message=6 queen=6 queen_edge=0 event=&#39;defeated&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=6 attacker=2 event=&#39;duel&#39;
+me=6 rank=1 event=&#39;deflected&#39;
+defender=3 attacker=5 event=&#39;duel&#39;
+me=3 message=5 queen=5 queen_edge=0 event=&#39;defeated&#39;
+defender=3 attacker=1 event=&#39;duel&#39;
+defender=3 queen=5 attacker=1 event=&#39;forwarding challenge...&#39;
+defender=0 attacker=5 event=&#39;duel&#39;
+defender=0 queen=1 attacker=5 event=&#39;forwarding challenge...&#39;
+defender=4 attacker=7 event=&#39;duel&#39;
+me=4 message=7 queen=7 queen_edge=0 event=&#39;defeated&#39;
+defender=7 attacker=4 event=&#39;duel&#39;
+me=7 rank=1 event=&#39;deflected&#39;
+defender=5 attacker=1 event=&#39;duel&#39;
+me=5 rank=2 event=&#39;deflected&#39;
+defender=1 attacker=5 event=&#39;duel&#39;
+me=1 message=5 queen=5 queen_edge=1 event=&#39;defeated&#39;
+defender=4 attacker=6 event=&#39;duel&#39;
+defender=4 queen=7 attacker=6 event=&#39;forwarding challenge...&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=2 attacker=7 event=&#39;duel&#39;
+defender=2 queen=6 attacker=7 event=&#39;forwarding challenge...&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=7 attacker=6 event=&#39;duel&#39;
+me=7 rank=2 event=&#39;deflected&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 attacker=7 event=&#39;duel&#39;
+me=6 message=7 queen=7 queen_edge=1 event=&#39;defeated&#39;
+defender=6 attacker=5 event=&#39;duel&#39;
+defender=6 queen=7 attacker=5 event=&#39;forwarding challenge...&#39;
+defender=1 attacker=7 event=&#39;duel&#39;
+defender=1 queen=5 attacker=7 event=&#39;forwarding challenge...&#39;
+defender=5 attacker=7 event=&#39;duel&#39;
+me=5 message=7 queen=7 queen_edge=2 event=&#39;defeated&#39;
+defender=7 attacker=5 event=&#39;duel&#39;
+me=7 rank=3 event=&#39;deflected&#39;
+Winner! Object Node:
+Value: 7
+Rank: 3
+Connections: [&amp;ltnode.Node object&amp;gt, &amp;ltnode.Node object&amp;gt, &amp;ltnode.Node object&amp;gt]
+Address: 0x7f925e9a7950
+</code></pre><h4 id=formatting-from-dot-to-png>Formatting from DOT to PNG</h4><p>A handy way to bulk-compile all the dot to png:</p><pre tabindex=0><code>hypercube-election/output$ ls | xargs -I {} dot -Tpng {} -o {}.png
+</code></pre></main></body></html>
